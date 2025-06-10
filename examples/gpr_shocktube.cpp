@@ -1,28 +1,21 @@
-#include "../src/GPR/GPRModel.h"
+#include "../src/GPR/GPRSolver1D.h"
 #include <iostream>
-#include <array>
-
-struct Conserv {
-    double rho;
-    std::array<double,3> mom;
-    double chi;
-    std::array<double,3> J;
-    double rhoE;
-};
-
-static Conserv toConservative(const GPRState& s)
-{
-    Conserv c{};
-    c.rho = s.rho;
-    for(int i=0;i<3;++i) c.mom[i] = s.rho*s.u[i];
-    c.chi = s.rho*s.chi;
-    for(int i=0;i<3;++i) c.J[i] = s.rho*s.j[i];
-    c.rhoE = s.rho*s.e;
-    return c;
-}
 
 int main()
 {
+    const int cells = 200;
+    const double length = 1.0;
+    const double dx = length / cells;
+    const double dt = 0.0005;
+    double alpha2 = 1.0;
+    double tau = 0.1;
+    double rho0 = 1.0;
+    double T0 = 1.0;
+    double cv = 1.0;
+    double cp = 1.4;
+
+    GPRSolver1D solver(cells, dx, dt, alpha2, tau, rho0, T0, cv, cp);
+
     GPRState left{};
     left.rho = 0.6635;
     left.u = {0.0,0.0,0.0};
@@ -41,27 +34,14 @@ int main()
     right.p = 0.0126;
     right.T = 0.8;
 
-    double alpha2 = 1.0;
-    auto fL = GPRModel::computeFlux(left, alpha2);
-    auto fR = GPRModel::computeFlux(right, alpha2);
+    solver.setInitialCondition([&](double x){
+        if (x < 0.5) return left; else return right;
+    });
 
-    Conserv UL = toConservative(left);
-    Conserv UR = toConservative(right);
+    solver.run(0.02); // integrate for short time
 
-    double sL = -1.0; // left-going wave speed guess
-    double sR = 1.0;  // right-going wave speed guess
-
-    Conserv flux{};
-    flux.rho = (sR*fL.mass - sL*fR.mass + sL*sR*(UR.rho-UL.rho))/(sR - sL);
-    for(int i=0;i<3;++i)
-        flux.mom[i] = (sR*fL.momentum[i] - sL*fR.momentum[i] + sL*sR*(UR.mom[i]-UL.mom[i]))/(sR - sL);
-    flux.chi = (sR*fL.entropy - sL*fR.entropy + sL*sR*(UR.chi-UL.chi))/(sR - sL);
-    for(int i=0;i<3;++i)
-        flux.J[i] = (sR*fL.impulse[i] - sL*fR.impulse[i] + sL*sR*(UR.J[i]-UL.J[i]))/(sR - sL);
-    flux.rhoE = (sR*fL.energy - sL*fR.energy + sL*sR*(UR.rhoE-UL.rhoE))/(sR - sL);
-
-    std::cout << "HLL mass flux: " << flux.rho << "\n";
-    std::cout << "HLL momentum flux x: " << flux.mom[0] << "\n";
-    std::cout << "HLL energy flux: " << flux.rhoE << "\n";
+    const auto &cellsVec = solver.cells();
+    for (int i=0;i<cells;i+=20) {
+        std::cout << i*dx << " " << cellsVec[i].rho << " " << cellsVec[i].u[0] << " " << cellsVec[i].p << "\n";
+    }
 }
-
