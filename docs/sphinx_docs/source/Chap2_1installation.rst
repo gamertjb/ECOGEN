@@ -27,7 +27,20 @@ More information on the Ubuntu doc page https://doc.ubuntu-fr.org/gcc.
 Installing openMPI
 ~~~~~~~~~~~~~~~~~~
 
-Download the latest stable version of openMPI_ under compressed format. At the time this page was written, it corresponded to the compressed file: openmpi-4.0.1.tar.gz. Uncompresse and move it into the directory:
+For most Ubuntu based systems the MPI development packages can be installed
+directly using ``apt`` which provides the ``mpicxx`` command required during
+ECOGEN compilation:
+
+.. highlight:: console
+
+::
+
+    sudo apt-get install libopenmpi-dev openmpi-bin
+
+If you prefer to compile openMPI yourself, download the latest stable version of
+openMPI_ under compressed format. At the time this page was written, it
+corresponded to the compressed file: openmpi-4.0.1.tar.gz. Uncompresse and move
+it into the directory:
 
 .. highlight:: console
 
