@@ -23,6 +23,15 @@ Start with ECOGEN
 The better way to start with **ECOGEN** is to follow installation instructions on the official documentation webSite: https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/Chap2_installation_Chapter.html
 
 Then you can follow the dedicated tutorial to run your first test: https://code-mphi.github.io/ECOGEN/docs/sphinx_docs/Chap4_1startWithECOGEN.html
+
+Dependencies
+------------
+ECOGEN requires a C++ compiler and an MPI implementation providing the ``mpicxx``
+command. On Ubuntu the following packages install the required tools:
+
+```bash
+sudo apt-get install build-essential libopenmpi-dev openmpi-bin
+```
 Running on HPC clusters
 -----------------------
 A Slurm submission script (scripts/ecogen.slurm) is provided to run ECOGEN on clusters. Adjust module commands and resources then submit with:

@@ -32,6 +32,7 @@
 #include "HeaderInputOutput.h"
 #include "../Meshes/stretchZone.h"
 #include "../Config.h"
+#include "../Relaxations/RelaxationGPR.h"
 
 using namespace tinyxml2;
 
@@ -831,7 +832,13 @@ void Input::inputModel(std::string casTest)
         }
         m_run->m_model->getRelaxations()->push_back(new RelaxationPTMu(element, nameEOS, fileName.str()));
       }
-	    else if (typeRelax == "PT") {
+      else if (typeRelax == "GPR") {
+        for (unsigned int r = 0; r < m_run->m_model->getRelaxations()->size(); r++) {
+          if ((*m_run->m_model->getRelaxations())[r]->getType() == TypeRelax::GPR) { throw ErrorXMLRelaxation(typeRelax, fileName.str(), __FILE__, __LINE__); }
+        }
+        m_run->m_model->getRelaxations()->push_back(new RelaxationGPR());
+      }
+      else if (typeRelax == "PT") {
         //Verify if relaxation not already added
         for (unsigned int r = 0; r < m_run->m_model->getRelaxations()->size(); r++) {
           if ((*m_run->m_model->getRelaxations())[r]->getType() == TypeRelax::PT) { throw ErrorXMLRelaxation(typeRelax, fileName.str(), __FILE__, __LINE__); }

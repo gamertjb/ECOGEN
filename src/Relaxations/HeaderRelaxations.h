@@ -36,7 +36,7 @@
 #include "RelaxationPFinite.h"
 #include "RelaxationPT.h"
 #include "RelaxationPTMu.h"
-
 //Add new relaxations here
+#include "RelaxationGPR.h"
 
 #endif // HEADERRELAXATIONS_H
