@@ -10,8 +10,7 @@ CXXFLAGS = -O3 -std=c++11 -Wall -Wextra -Wpedantic #release
 #CXXFLAGS = -O3 -std=c++11 -Wall -Wextra -Wpedantic -fprofile-arcs -ftest-coverage #code coverage
 #CXXFLAGS = -O3 -std=c++11 -Wall -Wextra -Wpedantic -pg #code profile
 
-dirs = $(shell find . -type d)
-SOURCES = $(foreach dir,$(dirs),$(wildcard $(dir)/*.cpp))
+SOURCES = $(shell find src -name '*.cpp')
 OBJETS = $(SOURCES:.cpp=.o)
 
 all: $(OBJETS)
