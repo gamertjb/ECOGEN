@@ -63,7 +63,7 @@ enum VarBoundary { p, rho, velU, velV, velW, SIZE = (velW+1) };
 enum TypeBCHeat { ADIABATIC = 0, IMPOSEDTEMP = 1, IMPOSEDFLUX = 2};
 
 //! \brief     Enumeration for the type of relaxation (P, PT, PTMu)
-enum TypeRelax { P = 1, PT = 2, PTMU = 3 };
+enum TypeRelax { P = 1, PT = 2, PTMU = 3, GPR = 4 };
 
 //! \brief     Enumeration for the gradient method (Finite-Difference (FD), Green-Gauss (GG))
 enum TypeGrad { FD, GG };
