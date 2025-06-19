@@ -51,7 +51,8 @@
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/shockTubeUnstruct/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/shockTubeUnstructRotated/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/squareWaterExplosion/</testCase> -->
-  <!-- <testCase>libTests/referenceTestCases/PUEq/2D/shockBubble/heliumAir/</testCase> -->
+  <testCase>libTests/referenceTestCases/PUEq/2D/shockBubble/heliumAir/</testCase>
+  <!-- helium-air bubble test enabled for GPR checks -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/RichtmyerMeshkov/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/RayleighTaylor/sameDynamicViscosity/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/2D/RayleighTaylor/sameKinematicViscosity/</testCase> -->
@@ -80,7 +81,8 @@
   <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/surfaceTension/dropletImpact_restart/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/gravity/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/AddPhysicalEffects/heatConduction/simple/</testCase> -->
-  <!-- <testCase>libTests/referenceTestCases/PUEq/3D/shockBubble/heliumAir/</testCase> -->
+  <!-- helium-air 3D bubble test enabled for GPR checks -->
+  <testCase>libTests/referenceTestCases/PUEq/3D/shockBubble/heliumAir/</testCase>
   <!-- <testCase>libTests/referenceTestCases/PUEq/3D/sphericalCollapse/Pratio1427/</testCase> -->
   <!-- <testCase>libTests/referenceTestCases/PUEq/3D/unstructured/</testCase> -->
 
